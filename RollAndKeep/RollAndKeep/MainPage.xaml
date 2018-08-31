@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RollAndKeep"
+             xmlns:behavior="clr-namespace:RollAndKeep.Behavior"
+             x:Class="RollAndKeep.MainPage">
+    <StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label Text="Dés lancés : " 
+                   TextColor="Black" Grid.Row="0" Grid.Column="0" HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
+            <Entry x:Name="nbOfRoll"  Keyboard="Numeric" Grid.Row="0" Grid.Column="1" VerticalOptions="CenterAndExpand">
+                <Entry.Behaviors>
+                    <behavior:PositiveBehavior x:Name="RollPositiveBehavior"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="Dés gardés : " 
+                   TextColor="Black" Grid.Row="1" Grid.Column="0" HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
+            <Entry x:Name="nbOfKeep" Keyboard="Numeric" Grid.Row="1" Grid.Column="1" VerticalOptions="CenterAndExpand">
+                <Entry.Behaviors>
+                    <behavior:PositiveBehavior x:Name="KeepPositiveBehavior"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Text="Modificateur : " 
+                   TextColor="Black" Grid.Row="2" Grid.Column="0" HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
+            <Entry x:Name="addToResult" Keyboard="Numeric" Grid.Row="2" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
+            <Label Text="Résultat obtenu : "
+                   TextColor="Black" Grid.Row="3" Grid.Column="0"  HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
+            <Label x:Name="resultLabel" 
+                   TextColor="Black" FontAttributes="Bold" Grid.Row="3" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+        </Grid>
+        <Button x:Name="rollButton" Text="Lancer" Clicked="OnRoll"/>
+        <Frame OutlineColor="Black">
+            <StackLayout>
+                <Label Text="Historique"/>
+                <ListView x:Name="oldConfigurationList" ItemTapped="oldConfigurationList_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Display}" TextColor="Black"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>
